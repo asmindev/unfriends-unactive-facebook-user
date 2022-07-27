@@ -14,7 +14,7 @@ class Browser:
 
     @property
     def cookies(self):
-        return 'Cookies initialized'
+        return "Cookies initialized"
 
     @cookies.setter
     def setkuki(self, kuki):
@@ -24,20 +24,25 @@ class Browser:
     def showkuki(self):
         return self.__cookies
 
-    def get(self, url, host="https://free.facebook.com"):
+    def get(self, url, host="https://mbasic.facebook.com"):
         try:
             if self.__cookies["cookie"] is None:
                 raise ValueError("Please set your cookie!")
-            return self.__req(host + check(url), headers=self.__cookies)
+            return self.__req(
+                host + check(url), headers=self.__cookies, cookies=self.__cookies
+            )
         except requests.exceptions.ConnectionError as f:
             raise ConnectionError(str(f))
 
-    def post(self, url, data, host="https://free.facebook.com"):
+    def post(self, url, data, host="https://mbasic.facebook.com"):
         try:
             if self.__cookies["cookie"] is None:
                 raise ValueError("Please set your cookie!")
             return self.__post(
-                host + check(url), data=data, headers=self.__cookies
+                host + check(url),
+                data=data,
+                headers=self.__cookies,
+                cookies=self.__cookies,
             )
         except requests.exceptions.ConnectionError as f:
             raise ConnectionError(str(f))
